@@ -22,6 +22,8 @@ const app = express();
 
 const MongoStore = connectMongo(session);
 
+console.log(process.env); 
+
 MongoClient.connect(process.env.MONGODB_URL).then(client => {
   const db = client.db(process.env.MONGODB_NAME);
 
@@ -59,4 +61,6 @@ MongoClient.connect(process.env.MONGODB_URL).then(client => {
   const port = process.env.PORT || "1337";
   /* eslint-disable no-console */
   app.listen(port, () => console.log(`Server listening on port ${port}`));
+}, (err)=>{
+  console.error('ERROR', err);
 });
